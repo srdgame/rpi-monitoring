@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QTextBrowser>
+#include <QQuickItem>
 
 #include "machine.h"
 
@@ -19,14 +20,19 @@ public:
     MenuSystem(QWidget *parent = nullptr, Machine * machine = nullptr);
     ~MenuSystem();
 
-    void init_constructor(Machine * machine);
+    void init_constructor(void);
     void init_sysLabels(void);
     void init_sysRadial(void);
-
     void init_sysInfo(void);
     void init_sysCpuInfo(void);
-    void init_sysText(Machine * machine);
-    void init_cpuText(Cpu * cpu);
+    void init_sysText(void);
+    void init_cpuText(void);
+
+    void updateRam();
+
+private slots:
+    void openMenuGraph(void);
+
 
 private:
     Ui::MenuSystem *ui;
@@ -37,6 +43,10 @@ private:
     QTextBrowser * m_txtModel;
     QTextBrowser * m_txtCore;
     QTextBrowser * m_txtSpeed;
+    QQuickItem * m_cpu;
+    QQuickItem * m_ram;
+    QQuickItem * m_disk;
 };
+
 
 #endif // MENUSYSTEM_H

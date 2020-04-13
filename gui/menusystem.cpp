@@ -1,8 +1,13 @@
 #include "menusystem.h"
 #include "ui_menusystem.h"
 #include <QQuickWidget>
+
 #include "radialbar.h"
 #include "cpu.h"
+#include "ram.h"
+#include "menugraph.h"
+
+#include <iostream>
 
 
 using namespace std;
@@ -12,13 +17,13 @@ MenuSystem::MenuSystem(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MenuSystem)
 {
-    init_constructor(m_machine);
+    init_constructor();
     m_machine = nullptr;
 }
 
 MenuSystem::MenuSystem(QWidget *parent, Machine * machine) : QDialog(parent), ui(new Ui::MenuSystem), m_machine(machine)
 {
-    init_constructor(m_machine);
+    init_constructor();
 }
 
 MenuSystem::~MenuSystem()
@@ -28,7 +33,7 @@ MenuSystem::~MenuSystem()
 }
 
 
-void MenuSystem::init_constructor(Machine * machine)
+void MenuSystem::init_constructor(void)
 {
     ui->setupUi(this);
 
@@ -43,10 +48,20 @@ void MenuSystem::init_constructor(Machine * machine)
     init_sysRadial();
 
     // set sys txt
-    init_sysText(machine);
+    init_sysText();
 
     // set cpu txt
-    init_cpuText(m_machine->getCpu());
+    init_cpuText();
+
+
+    // set btn transparent
+    foreach(QCommandLinkButton *btn, this->findChildren<QCommandLinkButton*>())
+    {
+        btn->setStyleSheet("background: transparent;");
+    }
+
+    // connect signals
+    connect(ui->btn_graph, SIGNAL(clicked()), this, SLOT(openMenuGraph()));
 }
 
 void MenuSystem::init_sysLabels(void)
@@ -63,27 +78,49 @@ void MenuSystem::init_sysLabels(void)
 void MenuSystem::init_sysRadial(void)
 {
     int i = 0;
+    QQuickItem *quick;
 
-    foreach(QQuickItem *quick, ui->radial_perf->rootObject()->findChildren<QQuickItem*>())
+    quick = ui->radial_perf->rootObject()->findChild<QQuickItem*>("radial_cpu");
+    if (quick != nullptr)
     {
         quick->setProperty("value", 0);
+        m_cpu=quick;
+        i++;
+    }
+
+    quick = ui->radial_perf->rootObject()->findChild<QQuickItem*>("radial_ram");
+    if (quick != nullptr)
+    {
+        quick->setProperty("value", 0);
+        m_ram=quick;
+        i++;
+    }
+
+    quick = ui->radial_perf->rootObject()->findChild<QQuickItem*>("radial_disk");
+    if (quick != nullptr)
+    {
+        quick->setProperty("value", 0);
+        m_disk=quick;
         i++;
     }
 }
 
-void MenuSystem::init_sysText(Machine * machine)
+void MenuSystem::init_sysText(void)
 {
     m_txtUser = ui->txt_user;
     m_txtOs = ui->txt_os;
     m_txtKernel = ui->txt_kernel;
 
-    m_txtUser->setText(machine->getUser());
-    m_txtOs->setText(machine->getOs());
-    m_txtKernel->setText(machine->getKernel());
+    m_txtUser->setText(m_machine->getUser());
+    m_txtOs->setText(m_machine->getOs());
+    m_txtKernel->setText(m_machine->getKernel());
 }
 
-void MenuSystem::init_cpuText(Cpu * cpu)
+void MenuSystem::init_cpuText(void)
 {
+    Cpu * cpu = new Cpu();
+    cpu = m_machine->getCpu();
+
     m_txtModel = ui->txt_model;
     m_txtCore = ui->txt_core;
     m_txtSpeed = ui->txt_speed;
@@ -93,4 +130,16 @@ void MenuSystem::init_cpuText(Cpu * cpu)
     m_txtSpeed->setText(QString::fromStdString(cpu->getFreq()));
 }
 
+void MenuSystem::openMenuGraph(void)
+{
+    MenuGraph *menu_graph = new MenuGraph(nullptr, m_machine);
+    menu_graph->show();
+    QWidget::close();
+}
 
+void MenuSystem::updateRam(void)
+{
+    Ram * ram = m_machine->getRam();
+    m_ram->setProperty("value", ram->getLoad());
+    cout << "ram " << ram->getLoad() << endl;
+}
