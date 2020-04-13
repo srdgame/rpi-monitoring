@@ -13,7 +13,8 @@ SUBDIRS += \
     rpi-monitoring.pro
 
 FORMS += \
-    gui/menusystem.ui
+    gui/menusystem.ui \
+    gui/menugraph.ui
 
 DISTFILES += \
     images/bench_icon.png \
@@ -35,7 +36,9 @@ HEADERS += \
     sources/machine.h \
     sources/cpu.h \
     sources/core.h \
-    sources/files.h
+    sources/files.h \
+    sources/ram.h \
+    gui/menugraph.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -44,7 +47,9 @@ SOURCES += \
     sources/machine.cpp \
     sources/cpu.cpp \
     sources/core.cpp \
-    sources/files.cpp
+    sources/files.cpp \
+    sources/ram.cpp \
+    gui/menugraph.cpp
 
 RESOURCES += \
     gui/qml.qrc
