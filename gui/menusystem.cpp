@@ -33,7 +33,7 @@ void MenuSystem::init_constructor(Machine * machine)
     ui->setupUi(this);
 
     // set background image
-    QPixmap backgroundImage("/home/dev/Documents/rpi-monitoring/images/menu_system.png");
+    QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_system.png");
     ui->background_sys->setPixmap(backgroundImage);
 
     // set label fonts
