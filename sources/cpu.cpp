@@ -43,9 +43,12 @@ int Cpu::read_cpuInfo(string &model, uint &nbCore, string &freq)
     ret = file.searchInfo(name, data, ':', "model name");
 
     if (getline(stringstream(data), model, '@') && getline(stringstream(data), freq))
+    {
+        freq = freq.substr(model.size() + 2, freq.size());
         ret = 0;
+    }
 
-    freq = freq.substr(model.size() + 2, freq.size());
+    file.countOccur(&nbCore, "cpu cores");
 
     return ret;
 }

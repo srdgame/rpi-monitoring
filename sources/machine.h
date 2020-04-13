@@ -4,6 +4,7 @@
 #include <QString>
 
 class Cpu;
+class Ram;
 
 class Machine
 {
@@ -15,6 +16,7 @@ public:
     QString getOs(void);
     QString getKernel(void);
     Cpu * getCpu(void);
+    Ram * getRam(void);
 
 private:
     int read_user(QString &user);
@@ -25,6 +27,7 @@ protected:
     QString m_os;
     QString m_kernel;
     Cpu * m_cpu;
+    Ram * m_ram;
 };
 
 #endif

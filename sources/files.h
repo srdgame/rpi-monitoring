@@ -14,6 +14,7 @@ public:
     Files(string path);
 
     int searchInfo(string &name, string &data, char delimiter, string search);
+    int countOccur(uint * occur, string search);
 
 protected:
     string m_path;

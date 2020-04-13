@@ -4,6 +4,7 @@
 
 #include "machine.h"
 #include "cpu.h"
+#include "ram.h"
 
 
 using namespace std;
@@ -26,11 +27,14 @@ Machine::Machine()
     }
 
     m_cpu = new Cpu();
+
+    m_ram = new Ram();
 }
 
 Machine::~Machine()
 {
     delete m_cpu;
+    delete m_ram;
 }
 
 QString Machine::getUser(void)
@@ -51,6 +55,11 @@ QString Machine::getKernel(void)
 Cpu * Machine::getCpu(void)
 {
     return m_cpu;
+}
+
+Ram * Machine::getRam(void)
+{
+    return m_ram;
 }
 
 int Machine::read_user(QString &user)
