@@ -6,6 +6,8 @@
 #include "cpu.h"
 #include "ram.h"
 #include "menugraph.h"
+#include "menubench.h"
+#include "menunet.h"
 
 #include <iostream>
 
@@ -21,7 +23,10 @@ MenuSystem::MenuSystem(QWidget *parent) :
     m_machine = nullptr;
 }
 
-MenuSystem::MenuSystem(QWidget *parent, Machine * machine) : QDialog(parent), ui(new Ui::MenuSystem), m_machine(machine)
+MenuSystem::MenuSystem(QWidget *parent, Machine * machine) :
+    QDialog(parent),
+    ui(new Ui::MenuSystem),
+    m_machine(machine)
 {
     init_constructor();
 }
@@ -62,6 +67,8 @@ void MenuSystem::init_constructor(void)
 
     // connect signals
     connect(ui->btn_graph, SIGNAL(clicked()), this, SLOT(openMenuGraph()));
+    connect(ui->btn_net, SIGNAL(clicked()), this, SLOT(openMenuNet()));
+    connect(ui->btn_bench, SIGNAL(clicked()), this, SLOT(openMenuBench()));
 }
 
 void MenuSystem::init_sysLabels(void)
@@ -134,6 +141,20 @@ void MenuSystem::openMenuGraph(void)
 {
     MenuGraph *menu_graph = new MenuGraph(nullptr, m_machine);
     menu_graph->show();
+    QWidget::close();
+}
+
+void MenuSystem::openMenuNet(void)
+{
+    MenuNet *menu = new MenuNet(nullptr, m_machine);
+    menu->show();
+    QWidget::close();
+}
+
+void MenuSystem::openMenuBench(void)
+{
+    MenuBench *menu = new MenuBench(nullptr, m_machine);
+    menu->show();
     QWidget::close();
 }
 

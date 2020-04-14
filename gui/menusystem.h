@@ -7,6 +7,8 @@
 
 #include "machine.h"
 
+class Machine;
+
 namespace Ui {
 class MenuSystem;
 }
@@ -32,6 +34,8 @@ public:
 
 private slots:
     void openMenuGraph(void);
+    void openMenuBench(void);
+    void openMenuNet(void);
 
 
 private:

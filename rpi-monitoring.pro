@@ -14,7 +14,9 @@ SUBDIRS += \
 
 FORMS += \
     gui/menusystem.ui \
-    gui/menugraph.ui
+    gui/menugraph.ui \
+    gui/menunet.ui \
+    gui/menubench.ui
 
 DISTFILES += \
     images/bench_icon.png \
@@ -38,7 +40,9 @@ HEADERS += \
     sources/core.h \
     sources/files.h \
     sources/ram.h \
-    gui/menugraph.h
+    gui/menugraph.h \
+    gui/menunet.h \
+    gui/menubench.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -49,7 +53,9 @@ SOURCES += \
     sources/core.cpp \
     sources/files.cpp \
     sources/ram.cpp \
-    gui/menugraph.cpp
+    gui/menugraph.cpp \
+    gui/menunet.cpp \
+    gui/menubench.cpp
 
 RESOURCES += \
     gui/qml.qrc
