@@ -30,12 +30,12 @@ public:
     void init_sysText(void);
     void init_cpuText(void);
 
-    void updateRam();
-
 private slots:
     void openMenuGraph(void);
     void openMenuBench(void);
     void openMenuNet(void);
+    void updateRam();
+
 
 
 private:

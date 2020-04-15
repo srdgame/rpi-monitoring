@@ -41,6 +41,8 @@ MenuSystem::~MenuSystem()
 void MenuSystem::init_constructor(void)
 {
     ui->setupUi(this);
+    QTimer *timer = new QTimer(this);
+
 
     // set background image
     QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_system.png");
@@ -69,6 +71,9 @@ void MenuSystem::init_constructor(void)
     connect(ui->btn_graph, SIGNAL(clicked()), this, SLOT(openMenuGraph()));
     connect(ui->btn_net, SIGNAL(clicked()), this, SLOT(openMenuNet()));
     connect(ui->btn_bench, SIGNAL(clicked()), this, SLOT(openMenuBench()));
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateRam()));
+    timer->start(1000);
 }
 
 void MenuSystem::init_sysLabels(void)
@@ -162,5 +167,4 @@ void MenuSystem::updateRam(void)
 {
     Ram * ram = m_machine->getRam();
     m_ram->setProperty("value", ram->getLoad());
-    cout << "ram " << ram->getLoad() << endl;
 }
