@@ -14,16 +14,19 @@ Ram::Ram()
 
 int Ram::getLoad(void)
 {
+    Ram::readInfo();
     return static_cast<int>(m_load);
 }
 
 int Ram::getFree(void)
 {
+    Ram::readInfo();
     return static_cast<int>(m_free);
 }
 
 int Ram::getTotal(void)
-{
+{    
+    Ram::readInfo();
     return static_cast<int>(m_total);
 }
 
@@ -61,7 +64,7 @@ int Ram::updateLoad(void)
 
     ret = file.searchInfo(name, data, ':', "MemAvailable");
     m_free = static_cast<double>(stoi(data, nullptr)) / 1024;   // value in kB => / 1024 B
-    m_load = (m_free / m_total) * 100;
+    m_load = ((m_total-m_free) / m_total) * 100;
 
     return ret;
 }
