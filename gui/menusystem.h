@@ -34,9 +34,8 @@ private slots:
     void openMenuGraph(void);
     void openMenuBench(void);
     void openMenuNet(void);
-    void updateRam();
-
-
+    void updateRam(void);
+    void updateCpu(void);
 
 private:
     Ui::MenuSystem *ui;

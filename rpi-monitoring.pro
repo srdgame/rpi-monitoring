@@ -37,12 +37,14 @@ HEADERS += \
     gui/external/RadialBarDemo/radialbar.h \
     sources/machine.h \
     sources/cpu.h \
-    sources/core.h \
     sources/files.h \
     sources/ram.h \
     gui/menugraph.h \
     gui/menunet.h \
-    gui/menubench.h
+    gui/menubench.h \
+    sources/cpuData.h \
+    sources/cpuSnap.h \
+    sources/cpuStats.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -50,12 +52,14 @@ SOURCES += \
     gui/external/RadialBarDemo/radialbar.cpp \
     sources/machine.cpp \
     sources/cpu.cpp \
-    sources/core.cpp \
     sources/files.cpp \
     sources/ram.cpp \
     gui/menugraph.cpp \
     gui/menunet.cpp \
-    gui/menubench.cpp
+    gui/menubench.cpp \
+    sources/cpuData.cpp \
+    sources/cpuSnap.cpp \
+    sources/cpuStats.cpp
 
 RESOURCES += \
     gui/qml.qrc
