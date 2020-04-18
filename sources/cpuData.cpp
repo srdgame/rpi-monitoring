@@ -1,14 +1,28 @@
-#include "cpuData.h"
+/**
+ * \file cpuData.cpp
+ * \brief Contains core stats properties at a specific moment
+ * \author Julien Karecki
+ */
 
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
+#include "cpuData.h"
 #include <sstream>
 
+
+/****************************************************
+ *                                      PRIVATE VARIABLES
+ * **************************************************/
 const std::string CpuData::STR_CPU("cpu");
 const std::string CpuData::STR_TOT("tot");
 
 const std::size_t CpuData::LEN_STR_CPU = 3;
 
-// == PUBLIC FUNCTIONS ==
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 void CpuData::ReadData(const std::string & line)
 {
 	std::istringstream ss(line);
@@ -27,3 +41,23 @@ void CpuData::ReadData(const std::string & line)
 	for(int i = 0; i < NUM_CPU_STATES; ++i)
     	ss >> mTimes[i];
 }
+
+
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/

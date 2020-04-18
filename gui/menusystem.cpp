@@ -1,6 +1,16 @@
+/**
+ * \file menusystem.cpp
+ * \brief System menu which displays target general information
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "menusystem.h"
 #include "ui_menusystem.h"
 #include <QQuickWidget>
+#include <iostream>
 
 #include "radialbar.h"
 #include "cpu.h"
@@ -10,17 +20,17 @@
 #include "menubench.h"
 #include "menunet.h"
 
-#include <iostream>
-
 
 using namespace std;
 
-
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 MenuSystem::MenuSystem(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MenuSystem)
 {
-    init_constructor();
+    MenuSystem::init_constructor();
     m_machine = nullptr;
 }
 
@@ -29,7 +39,7 @@ MenuSystem::MenuSystem(QWidget *parent, Machine * machine) :
     ui(new Ui::MenuSystem),
     m_machine(machine)
 {
-    init_constructor();
+    MenuSystem::init_constructor();
 }
 
 MenuSystem::~MenuSystem()
@@ -39,25 +49,88 @@ MenuSystem::~MenuSystem()
 }
 
 
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
+void MenuSystem::updateRam(void)
+{
+    Ram * ram = m_machine->getRam();
+    m_ram->setProperty("value", ram->getLoad());
+}
+
+void MenuSystem::updateCpu(void)
+{
+    Cpu * cpu = m_machine->getCpu();
+    m_cpu->setProperty("value", static_cast<uint>(cpu->getLoad()));
+}
+
+void MenuSystem::updateDiskFs(void)
+{
+    DiskFs * diskFs = m_machine->getDiskFs();
+
+    diskFs->getDiskFs();
+
+    long total = diskFs->getTotalSize();
+    long avail = diskFs->getFreeSize();
+    long perc = (total-avail)*100 / total;
+
+    m_disk->setProperty("value", static_cast<int>(perc));
+}
+
+void MenuSystem::openMenuGraph(void)
+{
+    MenuGraph *menu_graph = new MenuGraph(nullptr, m_machine);
+    menu_graph->show();
+    QWidget::close();
+}
+
+void MenuSystem::openMenuNet(void)
+{
+    MenuNet *menu = new MenuNet(nullptr, m_machine);
+    menu->show();
+    QWidget::close();
+}
+
+void MenuSystem::openMenuBench(void)
+{
+    MenuBench *menu = new MenuBench(nullptr, m_machine);
+    menu->show();
+    QWidget::close();
+}
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/
 void MenuSystem::init_constructor(void)
 {
     ui->setupUi(this);
 
     // set background image
-    QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_system.png");
+    QPixmap backgroundImage(IM_MENUSYS_PATH);
     ui->background_sys->setPixmap(backgroundImage);
 
     // set label fonts
-    init_sysLabels();
+    MenuSystem::init_sysLabels();
 
     // set radial bars
-    init_sysRadial();
+    MenuSystem::init_sysRadial();
 
     // set sys txt
-    init_sysText();
+    MenuSystem::init_sysText();
 
     // set cpu txt
-    init_cpuText();
+    MenuSystem::init_cpuText();
 
 
     // set btn transparent
@@ -74,9 +147,9 @@ void MenuSystem::init_constructor(void)
     QTimer *timer = new QTimer(this);
     QTimer *timer2 = new QTimer(this);
 
-    updateRam();
-    updateCpu();
-    updateDiskFs();
+    MenuSystem::updateRam();
+    MenuSystem::updateCpu();
+    MenuSystem::updateDiskFs();
     connect(timer, SIGNAL(timeout()), this, SLOT(updateRam()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCpu()));
     connect(timer2, SIGNAL(timeout()), this, SLOT(updateDiskFs()));
@@ -148,50 +221,4 @@ void MenuSystem::init_cpuText(void)
     m_txtModel->setText(QString::fromStdString(cpu->getModel()));
     m_txtCore->setText(QString::number(cpu->getNbCore()));
     m_txtSpeed->setText(QString::fromStdString(cpu->getFreq()));
-}
-
-void MenuSystem::openMenuGraph(void)
-{
-    MenuGraph *menu_graph = new MenuGraph(nullptr, m_machine);
-    menu_graph->show();
-    QWidget::close();
-}
-
-void MenuSystem::openMenuNet(void)
-{
-    MenuNet *menu = new MenuNet(nullptr, m_machine);
-    menu->show();
-    QWidget::close();
-}
-
-void MenuSystem::openMenuBench(void)
-{
-    MenuBench *menu = new MenuBench(nullptr, m_machine);
-    menu->show();
-    QWidget::close();
-}
-
-void MenuSystem::updateRam(void)
-{
-    Ram * ram = m_machine->getRam();
-    m_ram->setProperty("value", ram->getLoad());
-}
-
-void MenuSystem::updateCpu(void)
-{
-    Cpu * cpu = m_machine->getCpu();
-    m_cpu->setProperty("value", static_cast<uint>(cpu->getLoad()));
-}
-
-void MenuSystem::updateDiskFs(void)
-{
-    DiskFs * diskFs = m_machine->getDiskFs();
-
-    diskFs->updateDiskFs();
-
-    long total = diskFs->getTotalSize();
-    long avail = diskFs->getFreeSize();
-    long perc = (total-avail)*100 / total;
-
-    m_disk->setProperty("value", static_cast<int>(perc));
 }

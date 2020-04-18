@@ -1,42 +1,50 @@
-#include <sys/sysinfo.h>
+/**
+ * \file ram.cpp
+ * \brief Contains RAM information
+ * \author Julien Karecki
+ */
 
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
+#include <sys/sysinfo.h>
 #include <iostream>
 
 #include "ram.h"
 #include "files.h"
 
+
 using namespace std;
 
+
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 Ram::Ram()
 {
     Ram::readInfo();
 }
 
-int Ram::getLoad(void)
-{
-    Ram::readInfo();
-    return static_cast<int>(m_load);
-}
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
 
-int Ram::getFree(void)
-{
-    Ram::readInfo();
-    return static_cast<int>(m_free);
-}
 
-int Ram::getTotal(void)
-{    
-    Ram::readInfo();
-    return static_cast<int>(m_total);
-}
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
 
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
 int Ram::readInfo(void)
 {
     int ret = -1;
 
-    ret = readTotal();
+    ret = Ram::readTotal();
     if (ret == 0)
-        ret = updateLoad();
+        ret = Ram::updateLoad();
 
     return ret;
 }
@@ -53,6 +61,27 @@ int Ram::readTotal(void)
     }
 
     return ret;
+}
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/
+int Ram::getLoad(void)
+{
+    Ram::readInfo();
+    return static_cast<int>(m_load);
+}
+
+int Ram::getFree(void)
+{
+    Ram::readInfo();
+    return static_cast<int>(m_free);
+}
+
+int Ram::getTotal(void)
+{    
+    Ram::readInfo();
+    return static_cast<int>(m_total);
 }
 
 int Ram::updateLoad(void)

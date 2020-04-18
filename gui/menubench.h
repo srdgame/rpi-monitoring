@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "images.h"
+
 class Machine;
 
 namespace Ui {

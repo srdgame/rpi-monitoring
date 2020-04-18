@@ -1,3 +1,12 @@
+/**
+ * \file menubench.cpp
+ * \brief Benchmark menu which allows to launch several commands/tools to stress target
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "menubench.h"
 #include "ui_menubench.h"
 
@@ -6,6 +15,9 @@
 #include "menunet.h"
 
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 MenuBench::MenuBench(QWidget *parent, Machine * machine) :
     QDialog(parent),
     ui(new Ui::MenuBench),
@@ -13,7 +25,7 @@ MenuBench::MenuBench(QWidget *parent, Machine * machine) :
 {
     ui->setupUi(this);
     // set background image
-    QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_bench.png");
+    QPixmap backgroundImage(IM_MENUBENCH_PATH);
     ui->background_image->setPixmap(backgroundImage);
 
     // set btn transparent
@@ -33,6 +45,15 @@ MenuBench::~MenuBench()
     delete ui;
 }
 
+
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
 void MenuBench::openMenuSys(void)
 {
     MenuSystem *menu = new MenuSystem(nullptr, m_machine);
@@ -53,3 +74,13 @@ void MenuBench::openMenuNet(void)
     menu->show();
     QWidget::close();
 }
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/

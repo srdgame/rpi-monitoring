@@ -46,7 +46,8 @@ HEADERS += \
     sources/cpuSnap.h \
     sources/cpuStats.h \
     sources/disk.h \
-    sources/diskfs.h
+    sources/diskfs.h \
+    sources/images.h
 
 SOURCES += \
     gui/menusystem.cpp \

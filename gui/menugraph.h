@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QtWidgets>
 
+#include "images.h"
+
 class Machine;
 
 namespace Ui {

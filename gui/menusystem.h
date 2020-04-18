@@ -6,6 +6,7 @@
 #include <QQuickItem>
 
 #include "machine.h"
+#include "images.h"
 
 class Machine;
 

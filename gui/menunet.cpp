@@ -1,3 +1,12 @@
+/**
+ * \file menunet.cpp
+ * \brief Network menu which displays network information
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "menunet.h"
 #include "ui_menunet.h"
 
@@ -6,6 +15,9 @@
 #include "menubench.h"
 
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 MenuNet::MenuNet(QWidget *parent, Machine * machine) :
     QDialog(parent),
     ui(new Ui::MenuNet),
@@ -13,7 +25,7 @@ MenuNet::MenuNet(QWidget *parent, Machine * machine) :
 {
     ui->setupUi(this);
     // set background image
-    QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_network.png");
+    QPixmap backgroundImage(IM_MENUNET_PATH);
     ui->background_image->setPixmap(backgroundImage);
 
     // set btn transparent
@@ -34,6 +46,14 @@ MenuNet::~MenuNet()
 }
 
 
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
 void MenuNet::openMenuSys(void)
 {
     MenuSystem *menu = new MenuSystem(nullptr, m_machine);
@@ -54,4 +74,15 @@ void MenuNet::openMenuBench(void)
     menu->show();
     QWidget::close();
 }
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/
+
 

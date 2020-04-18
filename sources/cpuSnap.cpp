@@ -1,11 +1,26 @@
+/**
+ * \file cpuSnap.cpp
+ * \brief Snapshot all CPU cores stats from /proc/stat
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "cpuSnap.h"
 
 #include <fstream>
 
+
+/****************************************************
+ *                                      PRIVATE VARIABLES
+ * **************************************************/
 const int CpuSnapshot::INDEX_TOT = 0;
 
-// == PUBLIC FUNCTIONS ==
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 CpuSnapshot::CpuSnapshot()
 {
 	std::ifstream fileStat("/proc/stat");
@@ -17,7 +32,7 @@ CpuSnapshot::CpuSnapshot()
 		// cpu stats line found
         if(CpuData::IsDataCPUStats(line))
 		{
-			// store entry
+            // store entry : all cpu times at a specific moment
             mEntries.emplace_back(CpuData());
             CpuData & entry = mEntries.back();
 

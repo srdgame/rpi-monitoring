@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+#include "images.h"
 
 class Machine;
 

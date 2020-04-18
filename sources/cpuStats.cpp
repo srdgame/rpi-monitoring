@@ -1,25 +1,39 @@
+/**
+ * \file cpuStats.cpp
+ * \brief Treat all stats of CPU and cores
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "cpuStats.h"
 #include "cpuSnap.h"
 
 #include <iostream>
 
+/****************************************************
+ *                                      PRIVATE VARIABLES
+ * **************************************************/
 const int CpuStats::CPU_LABEL_W				= 3;
 const int CpuStats::STATE_PERC_BASE_W		= 4;
 
 const char * CpuStats::STR_STATES[CpuData::NUM_CPU_STATES]	= {	"usr",
-																		"sys",
-																		"nic",
-																		"idl",
-																		"iow",
-																		"hir",
-																		"sir",
-																		"ste",
-																		"gue",
-																		"gun" };
+                                                                "sys",
+                                                                "nic",
+                                                                "idl",
+                                                                "iow",
+                                                                "hir",
+                                                                "sir",
+                                                                "ste",
+                                                                "gue",
+                                                                "gun" };
 
 
-// == PUBLIC FUNCTIONS ==
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 CpuStats::CpuStats(const CpuSnapshot& s1, const CpuSnapshot& s2)
 	: mS1(s1)
 	, mS2(s2)
@@ -29,6 +43,25 @@ CpuStats::CpuStats(const CpuSnapshot& s1, const CpuSnapshot& s2)
 
 }
 
+
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/
 float CpuStats::GetPercActiveTotal()
 {
 	const float ACTIVE_TIME		= mS2.GetActiveTimeTotal() - mS1.GetActiveTimeTotal();

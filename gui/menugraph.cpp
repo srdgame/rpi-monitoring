@@ -1,3 +1,12 @@
+/**
+ * \file menugraph.cpp
+ * \brief Graph menu which displays real time graph target performance
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include "menugraph.h"
 #include "ui_menugraph.h"
 
@@ -7,6 +16,9 @@
 #include "machine.h"
 
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 MenuGraph::MenuGraph(QWidget *parent, Machine * machine) :
     QDialog(parent),
     ui(new Ui::MenuGraph),
@@ -14,7 +26,7 @@ MenuGraph::MenuGraph(QWidget *parent, Machine * machine) :
 {
     ui->setupUi(this);
     // set background image
-    QPixmap backgroundImage("/home/dev/Documents/Git/rpi-monitoring/images/menu_graph.png");
+    QPixmap backgroundImage(IM_MENUGRAPH_PATH);
     ui->background_graph->setPixmap(backgroundImage);
 
     // set btn transparent
@@ -34,6 +46,14 @@ MenuGraph::~MenuGraph()
     delete ui;
 }
 
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
 void MenuGraph::openMenuSys(void)
 {
     MenuSystem *menu = new MenuSystem(nullptr, m_machine);
@@ -54,3 +74,13 @@ void MenuGraph::openMenuNet(void)
     menu->show();
     QWidget::close();
 }
+
+
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/

@@ -1,3 +1,12 @@
+/**
+ * \file machine.cpp
+ * \brief Contains all target information
+ * \author Julien Karecki
+ */
+
+/****************************************************
+ *                                      INCLUDE
+ * **************************************************/
 #include <stdlib.h>
 #include <iostream>
 #include <sys/utsname.h>
@@ -11,6 +20,9 @@
 using namespace std;
 
 
+/****************************************************
+ *                                      CONSTRUCTOR
+ * **************************************************/
 Machine::Machine()
 {
     m_user = "";
@@ -41,36 +53,20 @@ Machine::~Machine()
     delete m_diskFs;
 }
 
-QString Machine::getUser(void)
-{
-    return m_user;
-}
 
-QString Machine::getOs(void)
-{
-    return m_os;
-}
+/****************************************************
+ *                                      SIGNALS
+ * **************************************************/
 
-QString Machine::getKernel(void)
-{
-    return m_kernel;
-}
 
-Cpu * Machine::getCpu(void)
-{
-    return m_cpu;
-}
+/****************************************************
+ *                                      SLOTS
+ * **************************************************/
 
-Ram * Machine::getRam(void)
-{
-    return m_ram;
-}
 
-DiskFs * Machine::getDiskFs(void)
-{
-    return m_diskFs;
-}
-
+/****************************************************
+ *                                      PRIVATE FUNCTIONS
+ * **************************************************/
 int Machine::read_user(QString &user)
 {
     int ret = -1;
@@ -99,4 +95,38 @@ int Machine::read_os_kernel(QString &os, QString &kernel)
     }
 
     return ret;
+}
+
+
+/****************************************************
+ *                                      PUBLIC FUNCTIONS
+ * **************************************************/
+QString Machine::getUser(void)
+{
+    return m_user;
+}
+
+QString Machine::getOs(void)
+{
+    return m_os;
+}
+
+QString Machine::getKernel(void)
+{
+    return m_kernel;
+}
+
+Cpu * Machine::getCpu(void)
+{
+    return m_cpu;
+}
+
+Ram * Machine::getRam(void)
+{
+    return m_ram;
+}
+
+DiskFs * Machine::getDiskFs(void)
+{
+    return m_diskFs;
 }

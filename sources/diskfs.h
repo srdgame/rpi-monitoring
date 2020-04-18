@@ -20,12 +20,11 @@ public:
     long getTotalSize(void);
     long getFreeSize(void);
 
-    void updateDiskFs(void);
-
 private:
     void initDiskFs(void);
     int readFs(const struct mntent *fs);
     void addDisk(const struct mntent *fs, const struct statvfs *vfs);
+    void updateDiskFs(void);
 
 protected:
     uint m_nbDisk;

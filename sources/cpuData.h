@@ -49,8 +49,10 @@ private:
 	std::size_t mTimes[NUM_CPU_STATES];
 };
 
-// == INLINE FUNCTIONS ==
 
+/****************************************************
+ *                                      INLINE FUNCTIONS
+ * **************************************************/
 inline 	std::size_t CpuData::GetActiveTime() const
 {
 	return	mTimes[S_USER] +
