@@ -93,7 +93,16 @@ int Ram::updateLoad(void)
 
     ret = file.searchInfo(name, data, ':', "MemAvailable");
     m_free = static_cast<double>(stoi(data, nullptr)) / 1024;   // value in kB => / 1024 B
-    m_load = ((m_total-m_free) / m_total) * 100;
+    if (m_total != 0.0)
+    {
+        m_load = ((m_total-m_free) / m_total) * 100;
+    }
+    else
+    {
+        m_load = 0;
+        cout << "RAM : division by 0" << endl;
+        ret = -1;
+    }
 
     return ret;
 }

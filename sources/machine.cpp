@@ -78,6 +78,11 @@ int Machine::read_user(QString &user)
         user = tmp;
         ret = 0;
     }
+    else
+    {
+        fprintf(stderr, "Machine: %s: getenv failed: %s\n",
+                    Q_FUNC_INFO, strerror(errno));
+    }
 
     return ret;
 }
@@ -92,6 +97,11 @@ int Machine::read_os_kernel(QString &os, QString &kernel)
     {
         os = buf.nodename;
         kernel = buf.release;
+    }
+    else
+    {
+        fprintf(stderr, "Machine: %s: uname failed: %s\n",
+                    Q_FUNC_INFO, strerror(errno));
     }
 
     return ret;
