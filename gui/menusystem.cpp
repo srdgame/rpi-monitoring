@@ -5,6 +5,7 @@
 #include "radialbar.h"
 #include "cpu.h"
 #include "ram.h"
+#include "diskfs.h"
 #include "menugraph.h"
 #include "menubench.h"
 #include "menunet.h"
@@ -71,9 +72,16 @@ void MenuSystem::init_constructor(void)
     connect(ui->btn_bench, SIGNAL(clicked()), this, SLOT(openMenuBench()));
 
     QTimer *timer = new QTimer(this);
+    QTimer *timer2 = new QTimer(this);
+
+    updateRam();
+    updateCpu();
+    updateDiskFs();
     connect(timer, SIGNAL(timeout()), this, SLOT(updateRam()));
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCpu()));
+    connect(timer2, SIGNAL(timeout()), this, SLOT(updateDiskFs()));
     timer->start(1000);
+    timer2->start(30000);
 }
 
 void MenuSystem::init_sysLabels(void)
@@ -173,4 +181,17 @@ void MenuSystem::updateCpu(void)
 {
     Cpu * cpu = m_machine->getCpu();
     m_cpu->setProperty("value", static_cast<uint>(cpu->getLoad()));
+}
+
+void MenuSystem::updateDiskFs(void)
+{
+    DiskFs * diskFs = m_machine->getDiskFs();
+
+    diskFs->updateDiskFs();
+
+    long total = diskFs->getTotalSize();
+    long avail = diskFs->getFreeSize();
+    long perc = (total-avail)*100 / total;
+
+    m_disk->setProperty("value", static_cast<int>(perc));
 }

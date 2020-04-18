@@ -5,6 +5,7 @@
 
 class Cpu;
 class Ram;
+class DiskFs;
 
 class Machine
 {
@@ -17,6 +18,7 @@ public:
     QString getKernel(void);
     Cpu * getCpu(void);
     Ram * getRam(void);
+    DiskFs * getDiskFs(void);
 
 private:
     int read_user(QString &user);
@@ -28,6 +30,7 @@ protected:
     QString m_kernel;
     Cpu * m_cpu;
     Ram * m_ram;
+    DiskFs * m_diskFs;
 };
 
 #endif

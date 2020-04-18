@@ -5,6 +5,7 @@
 #include "machine.h"
 #include "cpu.h"
 #include "ram.h"
+#include "diskfs.h"
 
 
 using namespace std;
@@ -29,12 +30,15 @@ Machine::Machine()
     m_cpu = new Cpu();
 
     m_ram = new Ram();
+
+    m_diskFs = new DiskFs();
 }
 
 Machine::~Machine()
 {
     delete m_cpu;
     delete m_ram;
+    delete m_diskFs;
 }
 
 QString Machine::getUser(void)
@@ -60,6 +64,11 @@ Cpu * Machine::getCpu(void)
 Ram * Machine::getRam(void)
 {
     return m_ram;
+}
+
+DiskFs * Machine::getDiskFs(void)
+{
+    return m_diskFs;
 }
 
 int Machine::read_user(QString &user)

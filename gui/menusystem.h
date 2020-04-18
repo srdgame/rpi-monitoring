@@ -36,6 +36,7 @@ private slots:
     void openMenuNet(void);
     void updateRam(void);
     void updateCpu(void);
+    void updateDiskFs(void);
 
 private:
     Ui::MenuSystem *ui;

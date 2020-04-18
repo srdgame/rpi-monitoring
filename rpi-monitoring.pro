@@ -44,7 +44,9 @@ HEADERS += \
     gui/menubench.h \
     sources/cpuData.h \
     sources/cpuSnap.h \
-    sources/cpuStats.h
+    sources/cpuStats.h \
+    sources/disk.h \
+    sources/diskfs.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -59,7 +61,9 @@ SOURCES += \
     gui/menubench.cpp \
     sources/cpuData.cpp \
     sources/cpuSnap.cpp \
-    sources/cpuStats.cpp
+    sources/cpuStats.cpp \
+    sources/disk.cpp \
+    sources/diskfs.cpp
 
 RESOURCES += \
     gui/qml.qrc
