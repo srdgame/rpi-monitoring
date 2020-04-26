@@ -21,6 +21,8 @@ public:
     string getMount(void);
     long getSize(void);
     long getFree(void);
+    string toString(void);
+    long getPerc(void);
 
 private:
     string m_name;

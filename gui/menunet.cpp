@@ -43,6 +43,7 @@ MenuNet::MenuNet(QWidget *parent, Machine * machine) :
 MenuNet::~MenuNet()
 {
     delete ui;
+    delete m_machine;
 }
 
 

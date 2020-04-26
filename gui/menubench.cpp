@@ -15,6 +15,7 @@
 #include "menunet.h"
 
 
+
 /****************************************************
  *                                      CONSTRUCTOR
  * **************************************************/
@@ -43,6 +44,7 @@ MenuBench::MenuBench(QWidget *parent, Machine * machine) :
 MenuBench::~MenuBench()
 {
     delete ui;
+    delete m_machine;
 }
 
 

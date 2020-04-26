@@ -88,3 +88,24 @@ long Disk::getFree()
 {
     return m_free;
 }
+
+long Disk::getPerc()
+{
+    long ret = 0;
+
+    ret = (m_size - m_free)*100 / m_size;
+
+    return ret;
+}
+
+string Disk::toString(void)
+{
+    string ret = "";
+
+    ret.append(m_name+" - ");
+    ret.append(m_mount+" - ");
+    ret.append(to_string(m_size)+"MB - ");
+    ret.append(to_string(Disk::getPerc())+"%");
+
+    return ret;
+}

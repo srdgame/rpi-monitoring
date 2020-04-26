@@ -46,6 +46,15 @@ MenuSystem::~MenuSystem()
 {
     delete ui;
     delete m_machine;
+    delete m_txtUser;
+    delete m_txtOs;
+    delete m_txtKernel;
+    delete m_txtModel;
+    delete m_txtCore;
+    delete m_txtSpeed;
+    delete m_cpu;
+    delete m_ram;
+    delete m_disk;
 }
 
 
