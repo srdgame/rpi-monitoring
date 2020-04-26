@@ -16,6 +16,7 @@
 #include "menunet.h"
 #include "machine.h"
 #include "diskfs.h"
+#include "ram.h"
 
 
 #include <iostream>
@@ -43,50 +44,37 @@ MenuGraph::MenuGraph(QWidget *parent, Machine * machine) :
     }
 
     MenuGraph::updateDiskBrow();
+    m_plot = new QCustomPlot();
+    m_plot->addGraph();
+    m_plot->graph(0)->setAntialiasedFill(true);
+    m_plot->graph(0)->setAntialiased(true);
 
+    /* Configure x-Axis as time in secs */
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%s");
+    m_plot->xAxis->setTicker(timeTicker);
+    m_plot->axisRect()->setupFullAxesBox();
 
+    /* Configure x and y-Axis to display Labels */
+    m_plot->xAxis->setLabel("Time(s)");
+    m_plot->xAxis->setLabelFont(QFont(QFont().family(), 8));
+    m_plot->xAxis->setTickLabelFont(QFont(QFont().family(),8));
 
+    m_plot->yAxis->setLabel("Utilization(%)");
+    m_plot->yAxis->setLabelFont(QFont(QFont().family(), 8));
+    m_plot->yAxis->setTickLabelFont(QFont(QFont().family(),8));
+    m_plot->yAxis->setRange(0, 100);
 
-           // Create your time series
-              QLineSeries *series = new QLineSeries();
-              series->append(0, 6);
-              series->append(2, 4);
-              series->append(3, 8);
-              series->append(7, 4);
-              series->append(10, 5);
-              *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) <<   QPointF(20, 2);
-
-           // Configure your chart
-              QChart *chart2 = new QChart();
-              chart2->addSeries(series);
-              chart2->legend()->setAlignment(Qt::AlignLeft);
-              chart2->createDefaultAxes();
-
-
-              // remove borders
-              chart2->layout()->setContentsMargins(0,0,0,0);
-              chart2->setBackgroundRoundness(0);
-
-              // Create your chart view
-              QChartView *chartView2 = new QChartView(chart2);
-              chartView2->setRenderHint(QPainter::Antialiasing);
-
-              // Configure your chart
-              QLineSeries *series2 = new QLineSeries();
-              series2->append(0, 6);
-              series2->append(2, 4);
-              ui->layout_ram->addWidget(chartView2);
-
-
-
+    ui->layout_ram->addWidget(m_plot);
 
     // connect signals
     connect(ui->btn_sys, SIGNAL(clicked()), this, SLOT(openMenuSys()));
     connect(ui->btn_bench, SIGNAL(clicked()), this, SLOT(openMenuBench()));
     connect(ui->btn_net, SIGNAL(clicked()), this, SLOT(openMenuNet()));
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateDiskChart()));
-    timer->start(10000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(realtimePlot()));
+    timer->start(100);
+
 }
 
 MenuGraph::~MenuGraph()
@@ -97,6 +85,7 @@ MenuGraph::~MenuGraph()
     delete m_ram_chart;
     delete m_serie;
     delete m_tab_disk;
+    delete m_plot;
 }
 
 /****************************************************
@@ -126,6 +115,22 @@ void MenuGraph::openMenuNet(void)
     MenuNet *menu = new MenuNet(nullptr, m_machine);
     menu->show();
     QWidget::close();
+}
+
+void MenuGraph::realtimePlot()
+{
+    static QTime time(QTime::currentTime());
+    double key = time.elapsed()/1000.0;
+    static double lastPointKey = 0;
+    if(key - lastPointKey > 0.002)
+    {
+        m_plot->graph(0)->addData(key, m_machine->getRam()->getLoad());
+        lastPointKey = key;
+    }
+
+    /* make key axis range scroll right with the data at a constant range. */
+    m_plot->xAxis->setRange(key, 20, Qt::AlignRight);
+    m_plot->replot();
 }
 
 

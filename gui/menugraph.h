@@ -7,6 +7,7 @@
 #include <QTableWidget>
 
 #include "images.h"
+#include "qcustomplot.h"
 
 class Machine;
 
@@ -26,6 +27,7 @@ private slots:
     void openMenuSys(void);
     void openMenuBench(void);
     void openMenuNet(void);
+    void realtimePlot(void);
 
 private:
     void updateDiskBrow(void);
@@ -37,6 +39,7 @@ private:
     QChart * m_ram_chart;
     QPieSeries * m_serie;
     QTableWidget * m_tab_disk;
+    QCustomPlot * m_plot;
 };
 
 #endif // MENUGRAPH_H

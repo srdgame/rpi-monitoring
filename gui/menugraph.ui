@@ -117,7 +117,7 @@
      <x>89</x>
      <y>40</y>
      <width>701</width>
-     <height>171</height>
+     <height>291</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="layout_ram"/>
@@ -126,10 +126,15 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>280</y>
+     <y>350</y>
      <width>131</width>
      <height>19</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <underline>true</underline>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);</string>
@@ -142,9 +147,9 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>270</y>
+     <y>340</y>
      <width>431</width>
-     <height>151</height>
+     <height>131</height>
     </rect>
    </property>
   </widget>
