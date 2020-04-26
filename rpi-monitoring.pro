@@ -48,7 +48,8 @@ HEADERS += \
     sources/cpuStats.h \
     sources/disk.h \
     sources/diskfs.h \
-    sources/images.h
+    sources/images.h \
+    sources/external/qcustomplot/qcustomplot.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -65,7 +66,8 @@ SOURCES += \
     sources/cpuSnap.cpp \
     sources/cpuStats.cpp \
     sources/disk.cpp \
-    sources/diskfs.cpp
+    sources/diskfs.cpp \
+    sources/external/qcustomplot/qcustomplot.cpp
 
 RESOURCES += \
     gui/qml.qrc
@@ -75,5 +77,6 @@ QML_IMPORT_PATH += \
 
 INCLUDEPATH += \
     sources/ \
+    sources/external \
     gui/ \
     gui/external/RadialBarDemo/
