@@ -77,6 +77,6 @@ QML_IMPORT_PATH += \
 
 INCLUDEPATH += \
     sources/ \
-    sources/external \
+    sources/external/qcustomplot \
     gui/ \
     gui/external/RadialBarDemo/
