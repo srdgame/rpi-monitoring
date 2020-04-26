@@ -1,4 +1,4 @@
-QT       += charts core gui qml quick quickwidgets
+QT       += charts core gui qml quick quickwidgets printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11 qwt
