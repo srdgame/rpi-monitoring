@@ -1,7 +1,8 @@
-QT       += core gui qml quick quickwidgets
+QT       += charts core gui qml quick quickwidgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++11 qwt
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
