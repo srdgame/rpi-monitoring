@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include <QtWidgets>
-#include <QtCharts>
 #include <QTableWidget>
 
 #include "images.h"
@@ -35,9 +34,6 @@ private:
 private:
     Ui::MenuGraph *ui;
     Machine * m_machine;
-    QChart * m_disk_chart;
-    QChart * m_ram_chart;
-    QPieSeries * m_serie;
     QTableWidget * m_tab_disk;
     QCustomPlot * m_plot;
 };

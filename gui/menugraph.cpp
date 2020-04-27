@@ -81,9 +81,6 @@ MenuGraph::~MenuGraph()
 {
     delete ui;
     delete m_machine;
-    delete m_disk_chart;
-    delete m_ram_chart;
-    delete m_serie;
     delete m_tab_disk;
     delete m_plot;
 }

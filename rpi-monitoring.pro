@@ -1,4 +1,4 @@
-QT       += charts core gui qml quick quickwidgets printsupport
+QT       += core gui qml quick quickwidgets printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11 qwt
@@ -49,7 +49,8 @@ HEADERS += \
     sources/disk.h \
     sources/diskfs.h \
     sources/images.h \
-    sources/external/qcustomplot/qcustomplot.h
+    sources/external/qcustomplot/qcustomplot.h \
+    sources/network.h
 
 SOURCES += \
     gui/menusystem.cpp \
@@ -67,7 +68,8 @@ SOURCES += \
     sources/cpuStats.cpp \
     sources/disk.cpp \
     sources/diskfs.cpp \
-    sources/external/qcustomplot/qcustomplot.cpp
+    sources/external/qcustomplot/qcustomplot.cpp \
+    sources/network.cpp
 
 RESOURCES += \
     gui/qml.qrc

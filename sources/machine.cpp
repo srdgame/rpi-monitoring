@@ -15,6 +15,7 @@
 #include "cpu.h"
 #include "ram.h"
 #include "diskfs.h"
+#include "network.h"
 
 
 using namespace std;
@@ -44,6 +45,8 @@ Machine::Machine()
     m_ram = new Ram();
 
     m_diskFs = new DiskFs();
+
+    m_net = new Network();
 }
 
 Machine::~Machine()
@@ -51,6 +54,7 @@ Machine::~Machine()
     delete m_cpu;
     delete m_ram;
     delete m_diskFs;
+    delete m_net;
 }
 
 
@@ -139,4 +143,9 @@ Ram * Machine::getRam(void)
 DiskFs * Machine::getDiskFs(void)
 {
     return m_diskFs;
+}
+
+Network * Machine::getNet(void)
+{
+    return m_net;
 }
