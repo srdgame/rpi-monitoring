@@ -8,8 +8,6 @@ The application displays general information about the target, monitoring graph 
 
 ![](images/graph.png)
 
-![](images/bench_cpu.gif)
-
 ![](images/bench_ram.gif)
 
 ![](images/network.png)
