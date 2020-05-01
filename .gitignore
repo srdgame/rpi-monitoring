@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+Makefile
+*.user
+moc_*
+qrc_*
+ui_*
+.qmake*
+rpi-monitoring

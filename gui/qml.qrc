@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>external/RadialBarDemo/radialbar.qml</file>
+    </qresource>
+</RCC>
