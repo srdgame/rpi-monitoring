@@ -1,7 +1,7 @@
 QT       += core gui qml quick quickwidgets printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11 qwt
+CONFIG += c++11
 
 
 # The following define makes your compiler emit warnings if you use
@@ -73,9 +73,6 @@ SOURCES += \
 
 RESOURCES += \
     gui/qml.qrc
-
-QML_IMPORT_PATH += \
-    /home/dev/Documents/rpi-monitoring/gui/external/RadialBarDemo
 
 INCLUDEPATH += \
     sources/ \
