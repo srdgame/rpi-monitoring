@@ -13,6 +13,9 @@
 #include "menusystem.h"
 #include "menugraph.h"
 #include "menubench.h"
+#include "network.h"
+
+#include <unistd.h>
 
 
 /****************************************************
@@ -23,6 +26,11 @@ MenuNet::MenuNet(QWidget *parent, Machine * machine) :
     ui(new Ui::MenuNet),
     m_machine(machine)
 {
+    QTimer * timer = new QTimer();
+    m_grid = new QGridLayout();
+    QGridLayout * grid_header = new QGridLayout();
+
+
     ui->setupUi(this);
     // set background image
     QPixmap backgroundImage(IM_MENUNET_PATH);
@@ -33,6 +41,17 @@ MenuNet::MenuNet(QWidget *parent, Machine * machine) :
     {
         btn->setStyleSheet("background: transparent;");
     }
+
+    ui->layout_array->addLayout(grid_header);
+    grid_header->addWidget(new QLabel("Name"), 0, 0);
+    grid_header->addWidget(new QLabel("Address"), 0, 1);
+    foreach (QLabel * label, this->findChildren<QLabel *>())
+    {
+        label->setFont(QFont("DejaVu", 22));
+        label->setStyleSheet("color: white");
+    }
+    MenuNet::updateNet();
+
 
     // connect signals
     connect(ui->btn_sys, SIGNAL(clicked()), this, SLOT(openMenuSys()));
@@ -85,5 +104,23 @@ void MenuNet::openMenuBench(void)
 /****************************************************
  *                                      PUBLIC FUNCTIONS
  * **************************************************/
+void MenuNet::updateNet(void)
+{
+    vector<QString> netIp = *(m_machine->getNet()->getInterfacesIp());
+    vector<QString> netName = *(m_machine->getNet()->getInterfacesName());
+    uint nb = m_machine->getNet()->getNbInterfaces();
+    uint i = 0;
 
+    ui->layout_array->addLayout(m_grid);
 
+    for (i=0; i<nb; i++)
+    {
+        m_grid->addWidget(new QLabel(netName[i]), i, 0);
+        m_grid->addWidget(new QLabel(netIp[i]), i, 1);
+    }
+
+    foreach (QLabel * label, this->findChildren<QLabel *>())
+    {
+        label->setStyleSheet("color: white");
+    }
+}

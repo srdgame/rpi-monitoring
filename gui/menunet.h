@@ -2,6 +2,8 @@
 #define MENUNET_H
 
 #include <QDialog>
+#include <QLabel>
+#include <QGridLayout>
 
 #include "images.h"
 
@@ -23,10 +25,12 @@ private slots:
     void openMenuSys(void);
     void openMenuGraph(void);
     void openMenuBench(void);
+    void updateNet(void);
 
 private:
     Ui::MenuNet *ui;
     Machine * m_machine;
+    QGridLayout *  m_grid;
 };
 
 #endif // MENUNET_H
