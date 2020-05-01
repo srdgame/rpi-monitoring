@@ -6,6 +6,7 @@
 class Cpu;
 class Ram;
 class DiskFs;
+class Network;
 
 class Machine
 {
@@ -19,6 +20,7 @@ public:
     Cpu * getCpu(void);
     Ram * getRam(void);
     DiskFs * getDiskFs(void);
+    Network * getNet(void);
 
 private:
     int read_user(QString &user);
@@ -31,6 +33,7 @@ protected:
     Cpu * m_cpu;
     Ram * m_ram;
     DiskFs * m_diskFs;
+    Network * m_net;
 };
 
 #endif
