@@ -79,17 +79,30 @@ int Cpu::read_cpuInfo(string &model, uint32_t &nbCore, string &freq)
     string name;
     int ret = -1;
 
-    // model = "model name: $(CPU_MODEL) @ $(CPU_FREQ)"
-    ret = file.searchInfo(name, data, ':', "model name");
-    // data = "$(CPU_MODEL) @ $(CPU_FREQ)"
-    if (getline(stringstream(data), model, '@') && getline(stringstream(data), freq))
-    {
-        // remove "model name : $(CPU_MODEL) " and "@ "
-        freq = freq.substr(model.size() + 2, freq.size());
-        ret = 0;
-    }
+	std::cerr << "read_cpuInfo" << std::endl;
 
-    file.countOccur(&nbCore, "cpu cores");
+    // model = "model name: $(CPU_MODEL) @ $(CPU_FREQ)" or
+	// model = "model name : $(CPU_MODEL)"
+    ret = file.searchInfo(name, data, ':', "model name");
+	if (ret)
+		return ret;
+
+	if (string.find("@") {
+		// data = "$(CPU_MODEL) @ $(CPU_FREQ)"
+		if (getline(stringstream(data), model, '@') && getline(stringstream(data), freq))
+		{
+			// remove "model name : $(CPU_MODEL) " and "@ "
+			freq = freq.substr(model.size() + 2, freq.size());
+			ret = 0;
+		}
+		file.countOccur(&nbCore, "cpu cores");
+	} else {
+		ret = file.searchInfo(name, data, ':', "BogoMIPS");
+		freq = data.substr(2, data.size());
+		file.countOccur(&nbCore, "processor");
+	}
+
+	std::cerr << "read_cpuInfo" << model << "\t" << freq << "\t" << nbCore << std::endl;
 
     return ret;
 }
