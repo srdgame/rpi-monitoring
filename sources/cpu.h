@@ -20,20 +20,20 @@ public:
     ~Cpu();
 
     string getModel(void);
-    uint getNbCore(void);
+    uint32_t getNbCore(void);
     string getFreq(void);
     float getLoad(void);
     CpuStats * getStats(void);
-    float getStatsCore(uint nbCpu);
+    float getStatsCore(uint32_t nbCpu);
 
 private:
-    int read_cpuInfo(string &model, uint &nbCore, string &freq);
+    int read_cpuInfo(string &model, uint32_t &nbCore, string &freq);
     void updateStats(void);
 
 protected:
     string m_model;
     string m_freq;
-    uint m_nbCore;
+    uint32_t m_nbCore;
     CpuStats * m_stats;
     CpuSnapshot m_snap1;
     CpuSnapshot m_snap2;

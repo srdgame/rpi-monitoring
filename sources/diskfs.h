@@ -16,7 +16,7 @@ public:
     DiskFs();
 
     QVector<Disk> getDiskFs(void);
-    uint getNbDisk(void);
+    uint32_t getNbDisk(void);
     long getTotalSize(void);
     long getFreeSize(void);
 
@@ -27,7 +27,7 @@ private:
     void updateDiskFs(void);
 
 protected:
-    uint m_nbDisk;
+    uint32_t m_nbDisk;
     long m_totalSize;
     long m_totalFree;
     QVector<Disk> m_diskFs;

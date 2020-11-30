@@ -34,7 +34,7 @@ public:
      *      0: correct file
      *      -1: err to open the file
      */
-    int countOccur(uint * occur, string search);
+    int countOccur(uint32_t * occur, string search);
 
 protected:
     string m_path;

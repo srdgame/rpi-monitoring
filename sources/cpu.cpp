@@ -72,7 +72,7 @@ void Cpu::updateStats(void)
     delete stats;
 }
 
-int Cpu::read_cpuInfo(string &model, uint &nbCore, string &freq)
+int Cpu::read_cpuInfo(string &model, uint32_t &nbCore, string &freq)
 {
     Files file("/proc/cpuinfo");
     string data;
@@ -103,7 +103,7 @@ string Cpu::getModel(void)
     return m_model;
 }
 
-uint Cpu::getNbCore(void)
+uint32_t Cpu::getNbCore(void)
 {
     return m_nbCore;
 }
@@ -128,7 +128,7 @@ CpuStats * Cpu::getStats(void)
     return m_stats;
 }
 
-float Cpu::getStatsCore(uint nbCpu)
+float Cpu::getStatsCore(uint32_t nbCpu)
 {
     float loadCpu = 0.0;
 

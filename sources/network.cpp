@@ -107,7 +107,7 @@ vector<QString> * Network::getInterfacesIp(void)
     return m_tabInterfacesIp;
 }
 
-uint Network::getNbInterfaces(void)
+uint32_t Network::getNbInterfaces(void)
 {
     int ret = -1;
 

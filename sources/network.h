@@ -16,13 +16,13 @@ public:
 
     vector<QString> * getInterfacesName(void);
     vector<QString> * getInterfacesIp(void);
-    uint getNbInterfaces(void);
+    uint32_t getNbInterfaces(void);
 
 private:
     int readInterfaces(void);
 
 protected:
-    uint m_nbInterfaces;
+    uint32_t m_nbInterfaces;
     vector<QString> * m_tabInterfacesName;
     vector<QString> * m_tabInterfacesIp;
 };

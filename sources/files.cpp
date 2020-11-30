@@ -52,7 +52,7 @@ int Files::searchInfo(string &name, string &data, char delimiter, string search)
     return ret;
 }
 
-int Files::countOccur(uint * occur, string search)
+int Files::countOccur(uint32_t * occur, string search)
 {
     int ret = -1;
     string line;

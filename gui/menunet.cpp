@@ -108,8 +108,8 @@ void MenuNet::updateNet(void)
 {
     vector<QString> netIp = *(m_machine->getNet()->getInterfacesIp());
     vector<QString> netName = *(m_machine->getNet()->getInterfacesName());
-    uint nb = m_machine->getNet()->getNbInterfaces();
-    uint i = 0;
+    uint32_t nb = m_machine->getNet()->getNbInterfaces();
+    uint32_t i = 0;
 
     ui->layout_array->addLayout(m_grid);
 

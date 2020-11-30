@@ -127,7 +127,7 @@ QVector<Disk> DiskFs::getDiskFs(void)
     return m_diskFs;
 }
 
-uint DiskFs::getNbDisk(void)
+uint32_t DiskFs::getNbDisk(void)
 {
     return m_nbDisk;
 }

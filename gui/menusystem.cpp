@@ -75,7 +75,7 @@ void MenuSystem::updateRam(void)
 void MenuSystem::updateCpu(void)
 {
     Cpu * cpu = m_machine->getCpu();
-    m_cpu->setProperty("value", static_cast<uint>(cpu->getLoad()));
+    m_cpu->setProperty("value", static_cast<uint32_t>(cpu->getLoad()));
 }
 
 void MenuSystem::updateDiskFs(void)
