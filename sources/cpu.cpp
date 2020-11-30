@@ -87,7 +87,7 @@ int Cpu::read_cpuInfo(string &model, uint32_t &nbCore, string &freq)
 	if (ret)
 		return ret;
 
-	if (string.find("@") {
+	if (data.find("@") != data.npos) {
 		// data = "$(CPU_MODEL) @ $(CPU_FREQ)"
 		if (getline(stringstream(data), model, '@') && getline(stringstream(data), freq))
 		{
